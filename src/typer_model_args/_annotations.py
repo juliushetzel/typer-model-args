@@ -71,7 +71,6 @@ def _create_literal_parameter(field_name: str, field: FieldInfo) -> Parameter:
     )
 
 def _create_regular_parameter(field_name: str, field: FieldInfo) -> Parameter:
-    field = FieldInfo.from_annotation(field.annotation)
     return Parameter(
         name=field_name,
         kind=Parameter.KEYWORD_ONLY,
