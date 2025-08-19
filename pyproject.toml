@@ -1,17 +1,19 @@
 [project]
 name = "typer_model_args"
-version = "0.1.0"
+version = "0.1.1"
 description = "Extensions for the python typer library"
 readme = "README.md"
 authors = [
     { name = "juliushetzel", email = "mail@juliushetzel.com" },
 ]
-license = { text = "MIT" }
 requires-python = ">=3.9"
 dependencies = [
     "pydantic>=2.1.1",
     "typer>=0.16.1",
 ]
+
+[project.license]
+text = "MIT"
 
 [dependency-groups]
 dev = [
@@ -21,15 +23,21 @@ dev = [
 ]
 
 [build-system]
-requires = ["hatchling"]
+requires = [
+    "hatchling",
+]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.sdist]
-include = ["src/"]
+include = [
+    "src/",
+]
 exclude = [
     "src/tests",
-    "src/tests/**"
+    "src/tests/**",
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/typer_model_args"]
+packages = [
+    "src/typer_model_args",
+]
