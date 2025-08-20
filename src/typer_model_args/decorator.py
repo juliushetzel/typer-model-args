@@ -15,6 +15,8 @@ def flatten_parameter_model_to_signature(
     Keeps typer annotations while doing so and adds extra typer annotations
     if missing. Can handle Literals
 
+    :param literals_to_enums: Whether to convert Literals internally to Enums. Defaults to True.
+
     ## Example
 
     ```python
