@@ -12,6 +12,9 @@ dependencies = [
     "typer>=0.16.1",
 ]
 
+[project.urls]
+Source = "https://github.com/juliushetzel/typer-model-args"
+
 [project.license]
 text = "MIT"
 
