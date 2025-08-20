@@ -1,6 +1,6 @@
 [project]
 name = "typer_model_args"
-version = "0.1.1"
+version = "0.2.0"
 description = "Extensions for the python typer library"
 readme = "README.md"
 authors = [
