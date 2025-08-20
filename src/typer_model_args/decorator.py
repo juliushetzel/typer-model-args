@@ -6,7 +6,10 @@ from ._annotations import flatten_signature
 from ._kwargs import rebuild_kwargs
 
 
-def flatten_parameter_model_to_signature():
+def flatten_parameter_model_to_signature(
+        *,
+        literals_to_enums: bool = True,
+):
     """
     Flatten pydantic models to the signature of the decorated function.
     Keeps typer annotations while doing so and adds extra typer annotations
@@ -33,7 +36,10 @@ def flatten_parameter_model_to_signature():
 
     def decorator(function: Callable[[...], any]) -> Callable[[dict[str, Any]], any]:
         original_signature = inspect.signature(function)
-        flat_signature = flatten_signature(original_signature)
+        flat_signature = flatten_signature(
+            original_signature,
+            literals_to_enums=literals_to_enums,
+        )
 
         def wrapper(**kwargs):
             nonlocal flat_signature

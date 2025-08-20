@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, Literal
 
 import pytest
 import typer
@@ -57,5 +57,22 @@ class TestAnnotatedKeepTyperProps:
 
         assert exec_info.errisinstance(ValueError)
         assert str(exec_info.value) == "duplicate parameter name: 'argument'"
+
+    def test_replace_literals_on_existing_typer_annotations(self):
+        app = typer.Typer()
+
+        class CliArgsWithLiteral(BaseModel):
+            argument: Annotated[Literal["yes", "no"], typer.Option()] = "yes"
+
+        @app.command()
+        @flatten_parameter_model_to_signature(literals_to_enums=True)
+        def my_cli_function(
+            cli_args_class: CliArgsWithLiteral,
+        ):
+            pass
+
+        result = runner.invoke(app, ["--argument", "yes"])
+
+        assert result.exit_code == 0
 
 
