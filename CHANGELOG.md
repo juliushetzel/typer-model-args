@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 0.3.1 *(2025-08-28)*
+----------------------------
+
+* Fix: use resolved annotation from fieldinfo for subclass check
+
+
 Version 0.3.0 *(2025-08-20)*
 ----------------------------
 
