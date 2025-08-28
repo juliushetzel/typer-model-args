@@ -75,4 +75,27 @@ class TestAnnotatedKeepTyperProps:
 
         assert result.exit_code == 0
 
+    def test_use_default_values(self):
+        app = typer.Typer()
+        default_nested_arg = "default_nested_arg"
+        default_nested_arg_2 = "default_nested_arg_2"
+        default_first_level_arg = "default_first_level_arg"
+
+        class CliArgs(BaseModel):
+            argument: Annotated[str, typer.Option()] = default_nested_arg
+            argument2: str = default_nested_arg_2
+
+        @app.command()
+        @flatten_parameter_model_to_signature(literals_to_enums=True)
+        def my_cli_function(
+            cli_args_class: CliArgs,
+            cli_arg: Annotated[str, typer.Option("--first-level-arg")] = default_first_level_arg,
+        ):
+            print(f"{cli_args_class.argument} {cli_args_class.argument2} {cli_arg}")
+
+        result = runner.invoke(app, [])
+
+        assert result.exit_code == 0
+        assert result.stdout == f"{default_nested_arg} {default_nested_arg_2} {default_first_level_arg}\n"
+
 
