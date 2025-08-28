@@ -36,8 +36,8 @@ class TestAnnotatedKeepTyperProps:
         @app.command()
         @flatten_parameter_model_to_signature()
         def my_cli_function(
+                cli_args_class: CliArgs,
                 cli_arg: Annotated[str, typer.Option("--first-level-arg")],
-                cli_args_class: CliArgs
         ):
             pass
 
