@@ -20,8 +20,7 @@ def flatten_signature(
     parameters = []
     original_kwargs_map = {}
     for parameter in signature.parameters.values():
-        field = FieldInfo.from_annotation(parameter.annotation)
-        field.default = parameter.default
+        field = _field_info_from_parameters(parameter)
         if issubclass(field.annotation, BaseModel):
             flat_parameters = _flatten_model_to_parameters(parameter, literals_to_enums=literals_to_enums)
             original_kwargs_map[parameter.name] = ModelParameterInfo(
@@ -36,6 +35,11 @@ def flatten_signature(
         signature=Signature(parameters),
         original_kwargs_map=original_kwargs_map
     )
+
+def _field_info_from_parameters(parameter: Parameter) -> FieldInfo:
+    field_info = FieldInfo.from_annotation(parameter.annotation)
+    field_info.default = parameter.default
+    return field_info
 
 def _create_parameter(
         field_name: str,
